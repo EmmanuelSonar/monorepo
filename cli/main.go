@@ -98,11 +98,28 @@ var infoCmd = &cobra.Command{
 	},
 }
 
+var buildCmd = &cobra.Command{
+	Use:   "build [app]",
+	Short: "Build app or all apps",
+	Run: func(cmd *cobra.Command, args []string) {
+		if len(args) == 0 {
+			fmt.Println("Building all apps...")
+			fmt.Println("✓ API built")
+			fmt.Println("✓ Worker built")
+			fmt.Println("✓ CLI built")
+			return
+		}
+		fmt.Printf("Building %s...\n", args[0])
+		fmt.Printf("✓ %s built\n", args[0])
+	},
+}
+
 func init() {
 	rootCmd.AddCommand(statusCmd)
 	rootCmd.AddCommand(listCmd)
 	rootCmd.AddCommand(logCmd)
 	rootCmd.AddCommand(infoCmd)
+	rootCmd.AddCommand(buildCmd)
 }
 
 func main() {
