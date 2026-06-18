@@ -4,6 +4,7 @@ import logging
 from dataclasses import dataclass, asdict
 from datetime import datetime
 from pathlib import Path
+from typing import Optional
 import os
 from dotenv import load_dotenv
 
@@ -19,8 +20,8 @@ class Job:
     job_type: str
     status: str
     created_at: str
-    completed_at: str = None
-    result: dict = None
+    completed_at: Optional[str] = None
+    result: Optional[dict] = None
 
 class JobQueue:
     def __init__(self):
@@ -87,7 +88,7 @@ async def main():
     logger.info("Starting job worker")
 
     # Start processing jobs
-    processor_task = asyncio.create_task(queue.process_jobs())
+    _ = asyncio.create_task(queue.process_jobs())
 
     # Simulate enqueueing jobs
     for i in range(3):
