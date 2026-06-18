@@ -3,8 +3,10 @@ import cors from 'cors';
 
 const app = express();
 const PORT = process.env.PORT || 3000;
+const CORS_ORIGIN = process.env.CORS_ORIGIN || 'http://localhost:3000';
 
-app.use(cors());
+app.disable('x-powered-by');
+app.use(cors({ origin: CORS_ORIGIN }));
 app.use(express.json());
 
 interface Task {
